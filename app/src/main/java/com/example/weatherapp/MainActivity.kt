@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -36,6 +38,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.ui.theme.WeatherAPPTheme
+import com.example.weatherapp.ui.theme.temperaturaDia
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -51,11 +54,50 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    MainPage()
                 }
             }
         }
     }
 }
+
+var informacaoSeteDias = listOf(
+    temperaturaDia(
+        temperatura = 16,
+        estado = "Limpo",
+        resource = R.drawable.sun
+    ),
+    temperaturaDia(
+        temperatura = 13,
+        estado = "Nublado",
+        resource = R.drawable.cloudy
+    ),
+    temperaturaDia(
+        temperatura = 10,
+        estado = "Chuva",
+        resource = R.drawable.rainy
+    ),
+    temperaturaDia(
+        temperatura = 2,
+        estado = "Neve",
+        resource = R.drawable.snowy
+    ),
+    temperaturaDia(
+        temperatura = 6,
+        estado = "Tempestade",
+        resource = R.drawable.storm
+    ),
+    temperaturaDia(
+        temperatura = 5,
+        estado = "Tempestade",
+        resource = R.drawable.storm
+    ),
+    temperaturaDia(
+        temperatura = 4,
+        estado = "Tempestade",
+        resource = R.drawable.storm
+    ),
+)
 
 @Preview(showBackground = true, widthDp = 390)
 @Composable
@@ -163,6 +205,7 @@ fun MainPage(): Unit {
         HeaderComponent()
         Info("Pedro")
         ImagemCentral()
+        ProximosSeteDias()
     }
 }
 
@@ -220,4 +263,31 @@ fun ImagemCentral(): Unit {
         }
     }
 }
+
+@Preview(showBackground = true, heightDp = 350, widthDp = 380)
+@Composable
+fun ProximosSeteDias(): Unit {
+    LazyRow(){
+        items(informacaoSeteDias){
+            ProximoDia(temperaturaDia = it)
+        }
+    }
+}
+
+@Composable
+fun ProximoDia(temperaturaDia: temperaturaDia): Unit{
+
+    Column (
+        modifier = Modifier
+            .width(100.dp)
+            .padding(15.dp, 15.dp, 15.dp, 15.dp)
+    ){
+        Image(painter = painterResource(id = temperaturaDia.resource), contentDescription = temperaturaDia.estado)
+        Text(text = temperaturaDia.temperatura.toString())
+        Text(text = temperaturaDia.estado)
+    }
+
+}
+
+
 
