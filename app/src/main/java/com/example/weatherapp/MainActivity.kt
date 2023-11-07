@@ -65,9 +65,11 @@ fun HeaderComponent(): Unit {
             .fillMaxWidth()
             .padding(12.dp, 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically)
+        verticalAlignment = Alignment.CenterVertically
+    )
     {
-        Button(onClick = { /*TODO*/ },
+        Button(
+            onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
             modifier = Modifier
                 .size(40.dp),
@@ -82,8 +84,9 @@ fun HeaderComponent(): Unit {
             )
         }
 
-        Button(onClick = { /*TODO*/ },
-            colors= ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+        Button(
+            onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
             contentPadding = PaddingValues(),
             modifier = Modifier
                 .clip(CircleShape)
@@ -92,7 +95,8 @@ fun HeaderComponent(): Unit {
 
             Image(
                 painter = painterResource(id = R.drawable.foto),
-                contentDescription = "Foto")
+                contentDescription = "Foto"
+            )
 
         }
     }
@@ -101,48 +105,48 @@ fun HeaderComponent(): Unit {
 
 @Preview(showBackground = true, widthDp = 390, heightDp = 65)
 @Composable
-fun Info(name : String = "Pedro"): Unit{
-    Column (modifier = Modifier.fillMaxWidth()){
+fun Info(name: String = "Pedro"): Unit {
+    Column(modifier = Modifier.fillMaxWidth()) {
 
-        Row (
+        Row(
             modifier = Modifier.fillMaxWidth()
-            ){
-                Text(
+        ) {
+            Text(
                 text = "Olá",
                 modifier = Modifier.padding(end = 2.dp),
                 color = Color.DarkGray
-                )
+            )
 
-                Text(
+            Text(
                 text = "$name",
                 modifier = Modifier,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
-                )
+            )
         }
 
-        Row (
+        Row(
             modifier = Modifier.fillMaxWidth()
-            ){
+        ) {
             Text(
                 text = formatData(Calendar.getInstance().time),
                 color = Color.DarkGray
-                )
-            }
-        Row (
+            )
+        }
+        Row(
             modifier = Modifier.fillMaxWidth()
-        ){
+        ) {
             Text(
                 text = "Alverca do Ribatejo",
                 color = Color.DarkGray
-                )
+            )
 
         }
 
     }
 }
 
-fun formatData(data: Date): String{
+fun formatData(data: Date): String {
     val format = SimpleDateFormat("dd MMM, EEE yyyy", Locale("pt", "PT"))
     return format.format(data)
 
@@ -150,12 +154,12 @@ fun formatData(data: Date): String{
 
 @Preview(showBackground = true, widthDp = 380, heightDp = 800)
 @Composable
-fun MainPage(): Unit{
-    Column (
-            modifier = Modifier
-                .padding(12.dp)
-                .fillMaxWidth()
-    ){
+fun MainPage(): Unit {
+    Column(
+        modifier = Modifier
+            .padding(12.dp)
+            .fillMaxWidth()
+    ) {
         HeaderComponent()
         Info("Pedro")
         ImagemCentral()
@@ -165,41 +169,54 @@ fun MainPage(): Unit{
 @OptIn(ExperimentalUnitApi::class)
 @Preview(showBackground = true, widthDp = 380, heightDp = 300)
 @Composable
-fun ImagemCentral(): Unit{
-    Box(modifier = Modifier
-        .height(300.dp)
-        .background(Color.Transparent)
-        .fillMaxWidth()
-    ){
-        Column {
+fun ImagemCentral(): Unit {
+    Box(
+        modifier = Modifier
+            .height(300.dp)
+            .background(Color.Transparent)
+            .fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .clip(CircleShape)
+                .background(Color.LightGray)
+                .size(290.dp)
+        ) {
+
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(15.dp),
                 contentAlignment = Alignment.TopCenter
-            ){
-                Image(painter = painterResource(id = R.drawable.sun),
-                    contentDescription = "sol")
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.sun),
+                    contentDescription = "sol"
+                )
             }
 
-            Row (verticalAlignment = Alignment.Bottom,
-                modifier = Modifier.fillMaxWidth(),
+            Row(
+                verticalAlignment = Alignment.Bottom,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(0.dp, 180.dp, 0.dp, 0.dp),
                 horizontalArrangement = Arrangement.Center
-            ){
-                Text(text = "12ºC",
+            ) {
+                Text(
+                    text = "12ºC",
                     fontWeight = FontWeight.Bold,
-                    fontSize = TextUnit(55f, TextUnitType.Sp ),
+                    fontSize = TextUnit(55f, TextUnitType.Sp),
                     color = MaterialTheme.colorScheme.primary
                 )
-
-                Text(text = "Parcialmente nublado",
+                Text(
+                    text = "Limpo",
                     fontWeight = FontWeight.Bold,
-                    fontSize = TextUnit(15f, TextUnitType.Sp ),
+                    fontSize = TextUnit(15f, TextUnitType.Sp),
                     color = MaterialTheme.colorScheme.tertiary
                 )
-
             }
-
         }
     }
 }
